@@ -4,15 +4,15 @@ on:
   push:
     branches:
       - main
-    pull_request:
+  pull_request:
       - main
-    workflow_dispatch:    
+  workflow_dispatch:    
 jobs:
   hello:
     runs-on: ubuntu-latest
     steps:
       - name: checkout repository code
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: List files
         run: ls -la
