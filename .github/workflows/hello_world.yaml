@@ -7,25 +7,29 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch:    
+  workflow_dispatch:    # it is used for manual trigger the workflow
 jobs:
-  hello:
-    runs-on: ubuntu-latest
+  hello:                 # name of the job
+    runs-on: ubuntu-latest        # it will runs on ubuntu latest version hosted by github
     steps:
-      - name: checkout repository code
-        uses: actions/checkout@v2
+      - name: checkout repository code         # step name 
+        uses: actions/checkout@v4
+        
+      - name: Set up java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin' # See 'Supported distributions' for available options
+          java-version: '17'      # it will setup the java version 17   
 
-      - name: List files
-        run: ls -la
-      
-      - name: hello world
-        run: echo "Hello harsha this is reality of world"
-        shell: bash
-  
-  goodbye:
-    runs-on: ubuntu-latest
-    steps:
-      - name: good bye message
-        run: echo "Good bye world by harsha"
-        shell: bash  
+      - name: Build and upload artifact to nexus
+        working-directory: Nexus-project01
+        env: 
+          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+        run: |
+          mvn clean deploy
+            -Dnexus.username=${MAVEN_USERNAME}
+            -Dnexus.password=${MAVEN_PASSWORD}
+                    
+ 
 
