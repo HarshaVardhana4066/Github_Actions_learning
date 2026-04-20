@@ -13,3 +13,12 @@ jobs:
     steps:
       - name: sayhello
         run: echo "Hi this is harsha"
+
+      - name: username
+        run: uname -a
+
+      - name: list-ct-dir
+        run: pwd
+
+      - name: list-disk-space
+        run: df -h      
