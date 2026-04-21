@@ -21,4 +21,4 @@ jobs:
           pwd
           lsblk
           df -h
-          if-config
+          
