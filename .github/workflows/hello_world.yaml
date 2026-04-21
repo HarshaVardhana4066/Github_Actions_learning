@@ -21,4 +21,10 @@ jobs:
           pwd
           lsblk
           df -h
+
+      - name: permission
+        run: chmod +x sample.sh
+        
+      - name: run the script
+        run: ./sample.sh  
           
